@@ -1,0 +1,9 @@
+apiVersion: v2
+description: Service Chart
+name: some-service
+version: 0.1.0
+
+dependencies:
+- name: fabric-chart
+  version: "2.13.4"
+  repository: "oci://us-docker.pkg.dev/fabric-registry/helm-charts"

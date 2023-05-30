@@ -1,0 +1,45 @@
+fabric-chart:
+  serviceName: some-service # service name
+  # https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+  replicaCount: 2 # amount of pods
+  api:
+    ingress:
+      external:
+        # -- enable external ingress
+        enabled: false
+        # -- enable basic auth on ingress
+        basicAuth: true
+        # -- apache bcrypt string for basic auth, generate using that [guide](https://csrobotics.atlassian.net/wiki/spaces/SW/pages/2388688949/Nginx+Basic+Auth)
+        basicAuthSecret:
+        # -- per ingress annotations
+        annotations:
+      internal:
+        # -- enable internal ingress (only for GCP and connected networks access)
+        enabled: false
+        # -- enable basic auth on ingress
+        basicAuth: true
+        # -- apache bcrypt string for basic auth, generate using that [guide](https://csrobotics.atlassian.net/wiki/spaces/SW/pages/2388688949/Nginx+Basic+Auth)
+        basicAuthSecret:
+        # -- per ingress annotations
+        annotations:
+    # -- should a service object be created
+    enabled: true
+  servicePort: 9999 # service port
+  # https://cloud.google.com/resource-manager/docs/access-control-org
+  attachIamRole: true # add iam role for the service
+  rolloutStrategy: RollingUpdate
+  # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+  readinessPath: /health # readiness path of the service
+  livenessPath: /health # liveness path of the service
+  startupPath: /health # startup probe path of the service
+  # https://cloud.google.com/container-registry
+  image:
+    registry: "gcr.io/fabric-registry/cloud-services" # name of the docker image
+    tag: "latest" # docker image tag
+  # https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/
+  #env:
+  # KEY: 'VALUE' # key and value for env var
+  # https://kubernetes.io/docs/concepts/configuration/secret/
+  # https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/
+  #secrets:
+  #  - some_secret # secret name in vault
