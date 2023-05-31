@@ -24,7 +24,7 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            gcr.io/fabric-registry/cloud-services/dashflake
+            gcr.io/fabric-registry/cloud-services/snow-board
           flavor: |
             latest=true
           tags: |

@@ -1,6 +1,6 @@
 apiVersion: v2
 description: Service Chart
-name: dashflake
+name: snow-board
 version: 0.1.0
 
 dependencies:

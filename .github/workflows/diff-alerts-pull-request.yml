@@ -18,7 +18,7 @@ jobs:
           CORTEX_API_KEY: ${{ secrets.ORG_CORTEX_API_KEY }}
           ACTION: diff
           RULES_DIR: "./alerts/"
-          NAMESPACES: dashflake
+          NAMESPACES: snow-board
       - name: comment PR
         uses: unsplash/comment-on-pr@v1.2.0
         env:

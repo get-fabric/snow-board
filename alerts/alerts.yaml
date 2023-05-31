@@ -1,9 +1,9 @@
-namespace: dashflake
+namespace: snow-board
 groups:
-  - name: dashflake
+  - name: snow-board
     rules:
       - alert: ServiceDown # check if service does not have an "UP" metric or if it is equal to 0
-        expr: '((up{pod=~"dashflake.*",env="prod"}) or on() vector(0)) == 0'
+        expr: '((up{pod=~"snow-board.*",env="prod"}) or on() vector(0)) == 0'
         for: 5s
         labels:
           service: "{{ $labels.app }}"
@@ -13,7 +13,7 @@ groups:
           description: "{{ $labels.app }} has been down for more than 5 seconds."
           summary: Service is down
       - alert: KubernetesContainerOomKiller # service is out of memory (due to limits or node memory availability) and has crashed
-        expr: '(kube_pod_container_status_restarts_total{pod=~"dashflake.*"} - kube_pod_container_status_restarts_total{pod=~"dashflake.*"} offset 10m >= 1) and ignoring (reason) min_over_time(kube_pod_container_status_last_terminated_reason{reason="OOMKilled", pod=~"dashflake.*"}[10m]) == 1'
+        expr: '(kube_pod_container_status_restarts_total{pod=~"snow-board.*"} - kube_pod_container_status_restarts_total{pod=~"snow-board.*"} offset 10m >= 1) and ignoring (reason) min_over_time(kube_pod_container_status_last_terminated_reason{reason="OOMKilled", pod=~"snow-board.*"}[10m]) == 1'
         for: 0m
         labels:
           service: "{{ $labels.app }}"
@@ -23,7 +23,7 @@ groups:
           summary: Kubernetes container oom killer (instance {{ $labels.instance }})
           description: "Container {{ $labels.container }} in pod {{ $labels.namespace }}/{{ $labels.pod }} has been OOMKilled {{ $value }} times in the last 10 minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
       - alert: KubernetesPodNotHealthy # service is not in Running state and is not up and running
-        expr: 'min_over_time(sum by (namespace, pod) (kube_pod_status_phase{phase=~"Pending|Unknown|Failed", pod=~"dashflake.*"})[15m:1m]) > 0'
+        expr: 'min_over_time(sum by (namespace, pod) (kube_pod_status_phase{phase=~"Pending|Unknown|Failed", pod=~"snow-board.*"})[15m:1m]) > 0'
         for: 0m
         labels:
           service: "{{ $labels.app }}"
@@ -33,7 +33,7 @@ groups:
           summary: Kubernetes Pod not healthy (instance {{ $labels.instance }})
           description: "Pod has been in a non-ready state for longer than 15 minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
       - alert: KubernetesPodCrashLooping # service keeps crashing sue to an issue and cannot come up
-        expr: 'increase(kube_pod_container_status_restarts_total{pod=~"dashflake.*"}[1m]) > 3'
+        expr: 'increase(kube_pod_container_status_restarts_total{pod=~"snow-board.*"}[1m]) > 3'
         for: 2m
         labels:
           service: "{{ $labels.app }}"
@@ -43,7 +43,7 @@ groups:
           summary: Kubernetes pod crash looping (instance {{ $labels.instance }})
           description: "Pod {{ $labels.pod }} is crash looping\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
       - alert: KubernetesDeploymentReplicasMismatch # the amount of pods deployed is not equal to the amount requested by the deployment
-        expr: 'kube_deployment_spec_replicas{deployment="dashflake"} != kube_deployment_status_replicas_available{deployment="dashflake"}'
+        expr: 'kube_deployment_spec_replicas{deployment="snow-board"} != kube_deployment_status_replicas_available{deployment="snow-board"}'
         for: 10m
         labels:
           severity: P3

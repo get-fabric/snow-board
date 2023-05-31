@@ -20,4 +20,4 @@ jobs:
           CORTEX_API_KEY: ${{ secrets.ORG_CORTEX_API_KEY }}
           ACTION: sync
           RULES_DIR: "./alerts/"
-          NAMESPACES: dashflake
+          NAMESPACES: snow-board
