@@ -1,5 +1,5 @@
 fabric-chart:
-  serviceName: some-service # service name
+  serviceName: dashflake # service name
   # https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
   replicaCount: 2 # amount of pods
   api:

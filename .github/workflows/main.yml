@@ -24,7 +24,7 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            gcr.io/fabric-registry/cloud-services/some-service
+            gcr.io/fabric-registry/cloud-services/dashflake
           flavor: |
             latest=true
           tags: |

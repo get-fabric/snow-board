@@ -1,6 +1,6 @@
 apiVersion: v2
 description: Service Chart
-name: some-service
+name: dashflake
 version: 0.1.0
 
 dependencies:
