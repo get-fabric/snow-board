@@ -1,0 +1,9 @@
+
+# DO NOT EDIT
+# configurations for setting up a snowflakeClient client with Fabric credentials
+
+SF_ACCOUNT =  "fa82594.us-central1.gcp"
+ROLE = "SYSADMIN"
+WAREHOUSE = "CSR_DB_LOAD"
+DATABASE = "CSR_DB"
+
