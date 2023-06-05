@@ -1,9 +1,6 @@
 from pydantic import BaseModel
-from snowflakeClient.model import FreeToteByActionEnum
 from typing import Dict
-from snowflakeClient.model import QC
-from snowflakeClient.model import ToteExtraction
-from snowflakeClient.model import ToteOptimization
+from api.model import QC, FreeToteByActionEnum, ToteOptimization, ToteExtraction
 
 
 class OperationalTasksResponse(BaseModel):
